@@ -14,10 +14,10 @@
             padding: 0;
             margin: 0;
             font-family: 'Roboto', sans-serif;
-            overflow: hidden;
+            overflow: hidden;                       
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: center;                                                                        
             
             /* Latar belakang sekarang menggunakan foto */
             background-image: url('background.webp'); /* GANTI NAMA FILE INI */
@@ -29,8 +29,8 @@
 
         .startpage {
             width: 80%;
-            max-width: 500px;
-            margin: auto;
+            max-width: 500px; 
+            margin: auto;                                   
             margin-top: 50px;
             display: flex;
             flex-direction: column;
@@ -70,7 +70,7 @@
             opacity: .8;
         }
 
-        /* --- STORY SECTION (UNCHANGED) --- */
+        /* --- STORY SECTION (MODIFIED) --- */
         .story {
             position: absolute;
             display: none;
@@ -87,22 +87,24 @@
         }
 
         .story img {
-            width: 350px;
+            width: 650px; /* MODIFIED: Ukuran disesuaikan */
             position: absolute;
-            right: 0;
+            right: 10px; /* MODIFIED: Diberi jarak */
             bottom: 0;
         }
 
         .story #app {
             bottom: 30px;
             left: 30px;
-            width: 70%;
-            padding: 80px;
+            width: calc(120% - 900px); /* MODIFIED: Lebar dinamis */
+            max-width: 90em;         /* MODIFIED: Batas maks di laptop */
+            padding: 50px;            /* MODIFIED: Padding disesuaikan */
             border-radius: 5px;
             position: absolute;
             background-color: rgba(0, 0, 0, .8);
             color: aliceblue;
-            font-size: 25px;
+            font-size: 28px;          /* MODIFIED: Ukuran font */
+            box-sizing: border-box;   /* MODIFIED: Penting untuk kalkulasi width */
         }
 
         .story button {
@@ -114,11 +116,49 @@
             color: aliceblue;
             font-size: 25px;
             cursor: pointer;
+            z-index: 10; /* MODIFIED: Pastikan tombol di atas */
         }
 
         .material-symbols-outlined {
             color: black;
             font-size: 50px;
+        }
+
+        
+
+        /* 2. TABLET STYLES (LAYAR SEDANG) */
+        /* Ini akan aktif jika lebar layar 1024px atau lebih kecil */
+        @media (max-width: 1024px) {
+            .story img {
+                width: 300px; /* Perkecil maskot untuk tablet */
+            }
+
+            .story #app {
+                width: calc(100% - 340px); /* Kalkulasi disesuaikan */
+                max-width: 550px;         /* Lebar maks disesuaikan */
+                padding: 30px;            /* Padding disesuaikan */
+                font-size: 24px;          /* Font disesuaikan */
+                left: 20px;
+            }
+        }
+
+
+        /* 3. MOBILE STYLES (LAYAR KECIL) */
+        /* Ini akan aktif jika lebar layar 767px atau lebih kecil */
+        /* (Ini adalah @media query Anda sebelumnya, pastikan ada DI BAWAH tablet) */
+        @media (max-width: 767px) {
+            .story img {
+                width: 400px; /* Perkecil lagi untuk HP */
+                right: 5px;
+            }
+            .story #app {
+                width: 90%; /* Ambil 90% lebar */
+                left: 5%;   /* Posisikan di tengah */
+                bottom: 20px;
+                padding: 20px;
+                font-size: 18px;
+                max-width: none; /* Hapus max-width di HP */
+            }
         }
         /* --- END OF STORY SECTION --- */
 
@@ -128,13 +168,15 @@
             visibility: hidden;
             position: absolute;
             width: 100%;
-            max-width: 450px; /* Game arena width */
+            max-width: 450px; /* Game arena width (INI SUDAH BENAR) */
             height: 100vh;
             background: url("background-916.webp");
             background-size: cover;
             background-repeat: repeat-y;
             margin: 0 auto;
             top: 0px;
+            left: 0;    /* MODIFIED: Menjamin centering 'position: absolute' */
+            right: 0;   /* MODIFIED: Menjamin centering 'position: absolute' */
             border: 5px solid #5d4037;
             border-radius: 10px;
             overflow: hidden;
@@ -196,7 +238,7 @@
         .rock {
             width: 70px;
             height: 70px;
-            background-image: url("rock.webp");
+            background-image: url("kuman.webp");
         }
         
         .trash.bottle {
@@ -218,10 +260,12 @@
         }
         
 
-        /* --- CONTROL & POPUP SECTION (UNCHANGED) --- */
+        /* --- CONTROL & POPUP SECTION (MODIFIED) --- */
         .control {
             display: none;
             z-index: 999;
+            /* MODIFIED: Position, left, right dihapus dari sini */
+            /* Tombol akan menempel pada <main> karena <main> punya max-width */
         }
 
         .control-btn {
@@ -232,18 +276,19 @@
             border-radius: 10px;
             cursor: pointer;
             opacity: 0.7;
+            /* MODIFIED: Posisi left/right akan relatif ke <main> */
         }
 
         #left-btn {
             background-image: url("left.webp");
             background-size: cover;
-            left: 40px;
+            left: 40px; /* 40px dari Tepi KIRI <main> */
         }
 
         #right-btn {
             background-image: url("right.webp");
             background-size: cover;
-            right: 40px;
+            right: 40px; /* 40px dari Tepi KANAN <main> */
         }
         
         .popup {
@@ -324,12 +369,12 @@
         <div id="arena">
           <div id="player"></div>
         </div>
-    </main>
 
-    <div class="control">
-        <div id="left-btn" class="control-btn"></div>
-        <div id="right-btn" class="control-btn"></div>
-    </div>
+        <div class="control">
+            <div id="left-btn" class="control-btn"></div>
+            <div id="right-btn" class="control-btn"></div>
+        </div>
+    </main>
 
     <div id="gameover" class="popup">
         <div class="popup-content">
@@ -407,7 +452,7 @@
             storyimg.style.animation = "kanan 2s"; // Assuming 'kanan' animation exists
             const typewriter = new Typewriter(app, { loop: false, delay: 50 });
 
-            typewriter.typeString('Di sebuah taman kota yang indah...')
+            typewriter.typeString('Di sekolah yang indah...')
                 .pauseFor(1000)
                 .deleteAll()
                 .typeString('Banyak orang tidak peduli dan membuang sampah sembarangan.')
