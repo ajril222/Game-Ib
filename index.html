@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -270,8 +270,8 @@
             background-size: contain;
             background-repeat: no-repeat;
             bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
+            left: 0;
+            will-change: transform;
             transition: background-image 0.3s;
         }
         
@@ -283,6 +283,9 @@
             position: absolute;
             background-size: contain;
             background-repeat: no-repeat;
+            top: 0;
+            left: 0;
+            will-change: transform;
         }
 
         .rock {
@@ -316,8 +319,9 @@
             z-index: 999;
             width: 100%;
             position: absolute;
-            bottom: 80px;
+            bottom: max(30px, 5%);
             left: 0;
+            padding: 0 5%;
         }
 
         .control-btn {
@@ -341,13 +345,13 @@
         #left-btn {
             background-image: url("left.webp");
             background-size: cover;
-            left: 20px;
+            left: 5%;
         }
 
         #right-btn {
             background-image: url("right.webp");
             background-size: cover;
-            right: 20px;
+            right: 5%;
         }
         
         .popup {
@@ -489,6 +493,11 @@
         let isGameOver = false;
         let isShielded = false;
         let highScore = localStorage.getItem('trashGameHighScore') || 0;
+        
+        let arenaWidth = 450;
+        let arenaHeight = 800;
+        let playerState = { x: 0, width: 80, height: 100 };
+        let fallingObjects = [];
 
         const trashTypes = [
             { class: 'trash bottle', points: 3 },
@@ -535,6 +544,12 @@
             isGameOver = false;
             isShielded = false;
 
+            arenaWidth = gameArena.clientWidth;
+            arenaHeight = gameArena.clientHeight;
+            playerState.x = (arenaWidth - playerState.width) / 2;
+            player.style.transform = `translate3d(${playerState.x}px, 0, 0)`;
+            fallingObjects = [];
+
             scoreDisplay.textContent = `Score: ${score}`;
             livesDisplay.innerHTML = '❤️❤️❤️';
             player.classList.remove('shielded');
@@ -561,6 +576,9 @@
         function gameLoop(timestamp) {
             if (isGameOver) return;
             
+            arenaWidth = gameArena.clientWidth;
+            arenaHeight = gameArena.clientHeight;
+            
             backgroundY += gameSpeed / 2;
             gameArena.style.backgroundPositionY = backgroundY + "px";
 
@@ -569,11 +587,24 @@
                 lastObjectTime = timestamp;
             }
 
-            document.querySelectorAll('.falling-object').forEach(obj => {
-                moveObject(obj);
-            });
-            
             updatePlayerPosition();
+            
+            for (let i = 0; i < fallingObjects.length; i++) {
+                let obj = fallingObjects[i];
+                if (obj.markedForDeletion) continue;
+                
+                obj.y += gameSpeed;
+                obj.element.style.transform = `translate3d(${obj.x}px, ${obj.y}px, 0)`;
+                
+                if (checkCollisionAABB(playerState, obj)) {
+                    handleCollisionMath(obj);
+                } else if (obj.y > arenaHeight) {
+                    obj.element.remove();
+                    obj.markedForDeletion = true;
+                }
+            }
+            
+            fallingObjects = fallingObjects.filter(obj => !obj.markedForDeletion);
             
             checkDifficulty();
             
@@ -584,46 +615,65 @@
             const obj = document.createElement('div');
             obj.classList.add('falling-object');
 
+            let typeStr = '';
+            let points = 0;
+            let w = 0, h = 0;
+
             const rand = Math.random();
             if (rand < 0.1 && score > 20) {
                 obj.classList.add('powerup', 'shield');
-                obj.dataset.type = 'shield';
+                typeStr = 'shield';
+                w = 60; h = 60;
             } else if (rand < 0.45) {
                 obj.classList.add('rock');
-                obj.dataset.type = 'rock';
+                typeStr = 'rock';
+                w = 70; h = 70;
             } else {
                 const trashType = trashTypes[Math.floor(Math.random() * trashTypes.length)];
                 trashType.class.split(' ').forEach(c => obj.classList.add(c));
-                obj.dataset.type = 'trash';
-                obj.dataset.points = trashType.points;
+                typeStr = 'trash';
+                points = trashType.points;
+                w = trashType.class.includes('bottle') ? 40 : 50;
+                h = trashType.class.includes('bottle') ? 60 : 50;
             }
             
-            obj.style.top = '-100px';
-            obj.style.left = Math.random() * (gameArena.clientWidth - 80) + 'px';
+            let xPos = Math.random() * (arenaWidth - w);
+            let yPos = -h;
+            
+            obj.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
             arena.appendChild(obj);
-        }
-
-        function moveObject(obj) {
-            let currentTop = parseInt(obj.style.top);
-            obj.style.top = (currentTop + gameSpeed) + 'px';
             
-            if (checkCollision(player, obj)) {
-                handleCollision(obj);
-            }
+            fallingObjects.push({
+                x: xPos,
+                y: yPos,
+                width: w,
+                height: h,
+                type: typeStr,
+                points: points,
+                element: obj,
+                markedForDeletion: false
+            });
+        }
+
+        function checkCollisionAABB(p, obj) {
+            let pLeft = p.x;
+            let pRight = p.x + p.width;
+            let pTop = arenaHeight - 30 - p.height; 
+            let pBottom = arenaHeight - 30;
             
-            else if (currentTop > window.innerHeight) {
-                obj.remove();
-            }
+            let oLeft = obj.x;
+            let oRight = obj.x + obj.width;
+            let oTop = obj.y;
+            let oBottom = obj.y + obj.height;
+            
+            return (pLeft < oRight && pRight > oLeft && pTop < oBottom && pBottom > oTop);
         }
 
-        function checkCollision(a, b) {
-            const rectA = a.getBoundingClientRect();
-            const rectB = b.getBoundingClientRect();
-            return !(rectA.right < rectB.left || rectA.left > rectB.right || rectA.bottom < rectB.top || rectA.top > rectB.bottom);
-        }
-
-        function handleCollision(obj) {
-            const type = obj.dataset.type;
+        function handleCollisionMath(obj) {
+            obj.markedForDeletion = true;
+            obj.element.remove();
+            
+            const type = obj.type;
 
             if (type === 'rock') {
                 if (isShielded) {
@@ -641,22 +691,20 @@
                     }
                 }
             } else if (type === 'trash') {
-                score += parseInt(obj.dataset.points);
+                score += obj.points;
                 scoreDisplay.textContent = `Score: ${score}`;
-                collectSound.currentTime = 0; // PERBAIKAN: Reset suara sebelum diputar
+                collectSound.currentTime = 0; 
                 collectSound.play();
             } else if (type === 'shield') {
                 isShielded = true;
                 player.classList.add('shielded');
-                powerupSound.currentTime = 0; // PERBAIKAN: Reset suara sebelum diputar
+                powerupSound.currentTime = 0; 
                 powerupSound.play();
                 setTimeout(() => {
                     isShielded = false;
                     player.classList.remove('shielded');
                 }, 5000);
             }
-
-            obj.remove();
         }
         
         function updateLivesUI() {
@@ -698,14 +746,13 @@
 
         function updatePlayerPosition() {
             if (isGameOver || moveDirection === 0) return;
-            const playerRect = player.getBoundingClientRect();
-            const arenaRect = gameArena.getBoundingClientRect();
             
-            if (moveDirection === -1 && playerRect.left > arenaRect.left + 5) {
-                player.style.left = (player.offsetLeft - playerSpeed) + 'px';
-            } else if (moveDirection === 1 && playerRect.right < arenaRect.right - 5) {
-                player.style.left = (player.offsetLeft + playerSpeed) + 'px';
+            if (moveDirection === -1 && playerState.x > 5) {
+                playerState.x -= playerSpeed;
+            } else if (moveDirection === 1 && playerState.x < arenaWidth - playerState.width - 5) {
+                playerState.x += playerSpeed;
             }
+            player.style.transform = `translate3d(${playerState.x}px, 0, 0)`;
         }
 
         function handleControlDown(e) {
