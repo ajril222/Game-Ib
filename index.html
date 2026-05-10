@@ -1,797 +1,858 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
     <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
     <title>Misi Pilah Sampah.....</title>
     <style>
-        * {
-            box-sizing: border-box;
-        }
+      * {
+        box-sizing: border-box;
+      }
 
-        html, body {
-            height: 100%;
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            overscroll-behavior: none; /* Prevent pull-to-refresh on mobile */
-        }
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        overscroll-behavior: none; /* Prevent pull-to-refresh on mobile */
+      }
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            overflow: hidden;                       
-            display: flex;
-            flex-direction: column;
-            align-items: center;                                                                        
-            justify-content: center;
-            
-            /* Latar belakang sekarang menggunakan foto */
-            background-image: url('background.webp'); /* GANTI NAMA FILE INI */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            touch-action: none;
-            -webkit-user-select: none;
-            user-select: none;
-        }
+      body {
+        font-family: "Roboto", sans-serif;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
 
-        .startpage {
-            width: 90%;
-            max-width: 500px; 
-            max-height: 95%;
-            overflow-y: auto;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-        }
+        /* Latar belakang sekarang menggunakan foto */
+        background-image: url("background.webp"); /* GANTI NAMA FILE INI */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        touch-action: none;
+        -webkit-user-select: none;
+        user-select: none;
+      }
 
-        .startpage img {
-            display: block;
-            width: 100%;
-            max-width: 350px;
-            margin-bottom: 20px;
-        }
-        
-        .startpage h2{
-            color: white;
-            text-shadow: 2px 2px 4px #000;
-            font-size: 2rem;
-            margin: 10px 0;
-        }
+      .startpage {
+        width: 90%;
+        max-width: 500px;
+        max-height: 95%;
+        overflow-y: auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+      }
 
-        .startpage button#start {
-            color: white;
-            background-color: #4CAF50; /* Green */
-            border-radius: 8px;
-            padding: 15px 60px;
-            margin: 20px;
-            font-size: 24px;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            transition: opacity 0.2s, transform 0.2s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
+      .startpage img {
+        display: block;
+        width: 100%;
+        max-width: 350px;
+        margin-bottom: 20px;
+      }
 
-        button:hover {
-            opacity: .8;
-        }
-        
-        button:active {
-            transform: scale(0.95);
-        }
+      .startpage h2 {
+        color: white;
+        text-shadow: 2px 2px 4px #000;
+        font-size: 2rem;
+        margin: 10px 0;
+      }
 
-        /* --- STORY SECTION (MODIFIED) --- */
-        .story {
-            position: absolute;
-            display: none;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-        }
+      .startpage button#start {
+        color: white;
+        background-color: #4caf50; /* Green */
+        border-radius: 8px;
+        padding: 15px 60px;
+        margin: 20px;
+        font-size: 24px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        transition:
+          opacity 0.2s,
+          transform 0.2s;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      }
 
-        .story .relative {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
+      button:hover {
+        opacity: 0.8;
+      }
 
+      button:active {
+        transform: scale(0.95);
+      }
+
+      /* --- STORY SECTION (MODIFIED) --- */
+      .story {
+        position: absolute;
+        display: none;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+      }
+
+      .story .relative {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .story img {
+        width: 45%;
+        max-width: 500px;
+        position: absolute;
+        right: 10px;
+        bottom: 0;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .story #app {
+        bottom: 50px;
+        left: 5%;
+        width: 55%;
+        padding: 30px;
+        border-radius: 15px;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.85);
+        color: aliceblue;
+        font-size: 26px;
+        line-height: 1.5;
+        z-index: 2;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        border: 2px solid #5d4037;
+      }
+
+      .story button {
+        background-color: rgba(0, 0, 0, 0.5);
+        border: none;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        color: aliceblue;
+        cursor: pointer;
+        z-index: 10;
+        transition: background-color 0.2s;
+      }
+
+      .story button:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+
+      .material-symbols-outlined {
+        color: white;
+        font-size: 40px;
+      }
+
+      /* 2. TABLET STYLES (LAYAR SEDANG) */
+      @media (max-width: 1024px) {
         .story img {
-            width: 45%; 
-            max-width: 500px;
-            position: absolute;
-            right: 10px; 
-            bottom: 0;
-            z-index: 1;
-            pointer-events: none;
+          width: 40%;
         }
-
         .story #app {
-            bottom: 50px;
-            left: 5%;
-            width: 55%; 
-            padding: 30px;            
-            border-radius: 15px;
-            position: absolute;
-            background-color: rgba(0, 0, 0, .85);
-            color: aliceblue;
-            font-size: 26px;          
-            line-height: 1.5;
-            z-index: 2;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border: 2px solid #5d4037;
+          width: 60%;
+          padding: 25px;
+          font-size: 22px;
         }
+      }
 
-        .story button {
-            background-color: rgba(0, 0, 0, 0.5);
-            border: none;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            color: aliceblue;
-            cursor: pointer;
-            z-index: 10;
-            transition: background-color 0.2s;
+      /* 3. MOBILE STYLES (LAYAR KECIL) */
+      @media (max-width: 767px) {
+        .story img {
+          width: 70%;
+          right: -10%;
+          opacity: 0.5;
+          z-index: 0;
         }
+        .story #app {
+          width: 90%;
+          left: 5%;
+          bottom: 30px;
+          padding: 20px;
+          font-size: 18px;
+          z-index: 2;
+          max-height: 70%;
+          overflow-y: auto;
+        }
+        .startpage h2 {
+          font-size: 1.5rem;
+        }
+        .startpage button#start {
+          padding: 10px 40px;
+          font-size: 20px;
+        }
+      }
+      /* --- END OF STORY SECTION --- */
 
-        .story button:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
+      /* --- GAME SECTION (MODIFIED) --- */
+      main {
+        visibility: hidden;
+        position: absolute;
+        width: 100%;
+        max-width: 450px; /* Game arena width (INI SUDAH BENAR) */
+        height: 100%;
+        background: url("background-916.webp");
+        background-size: cover;
+        background-repeat: repeat-y;
+        margin: 0 auto;
+        top: 0px;
+        left: 0; /* MODIFIED: Menjamin centering 'position: absolute' */
+        right: 0; /* MODIFIED: Menjamin centering 'position: absolute' */
+        border: none;
+        border-left: 5px solid #5d4037;
+        border-right: 5px solid #5d4037;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
 
-        .material-symbols-outlined {
-            color: white;
-            font-size: 40px;
-        }
+      .icon {
+        color: black;
 
-        /* 2. TABLET STYLES (LAYAR SEDANG) */
-        @media (max-width: 1024px) {
-            .story img {
-                width: 40%;
-            }
-            .story #app {
-                width: 60%;
-                padding: 25px;
-                font-size: 22px;
-            }
-        }
+        width: 60px;
+        height: 60px;
+      }
+      #game-ui {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        display: flex;
+        justify-content: space-between;
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px #000;
+      }
 
-        /* 3. MOBILE STYLES (LAYAR KECIL) */
-        @media (max-width: 767px) {
-            .story img {
-                width: 70%; 
-                right: -10%;
-                opacity: 0.5;
-                z-index: 0;
-            }
-            .story #app {
-                width: 90%; 
-                left: 5%;  
-                bottom: 30px;
-                padding: 20px;
-                font-size: 18px;
-                z-index: 2;
-                max-height: 70%;
-                overflow-y: auto;
-            }
-            .startpage h2 {
-                font-size: 1.5rem;
-            }
-            .startpage button#start {
-                padding: 10px 40px;
-                font-size: 20px;
-            }
-        }
-        /* --- END OF STORY SECTION --- */
+      #game-ui #lives {
+        font-size: 30px;
+      }
 
+      #arena {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
 
-        /* --- GAME SECTION (MODIFIED) --- */
-        main {
-            visibility: hidden;
-            position: absolute;
-            width: 100%;
-            max-width: 450px; /* Game arena width (INI SUDAH BENAR) */
-            height: 100%;
-            background: url("background-916.webp");
-            background-size: cover;
-            background-repeat: repeat-y;
-            margin: 0 auto;
-            top: 0px;
-            left: 0;    /* MODIFIED: Menjamin centering 'position: absolute' */
-            right: 0;   /* MODIFIED: Menjamin centering 'position: absolute' */
-            border: none;
-            border-left: 5px solid #5d4037;
-            border-right: 5px solid #5d4037;
-            box-sizing: border-box;
-            overflow: hidden;
-        }
-        
-        .icon {
-            color: black;
+      #player {
+        position: absolute;
+        z-index: 10;
+        width: 80px;
+        height: 100px;
+        background-image: url("trashcan.webp");
+        background-size: contain;
+        background-repeat: no-repeat;
+        bottom: 30px;
+        left: 0;
+        will-change: transform;
+        transition: background-image 0.3s;
+      }
 
-            width: 60px;
-            height: 60px;
-        }
-        #game-ui {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            right: 10px;
-            display: flex;
-            justify-content: space-between;
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px #000;
-        }
+      #player.shielded {
+        background-image: url("trashcan-shielded.webp");
+      }
 
-        #game-ui #lives {
-            font-size: 30px;
-        }
+      .falling-object {
+        position: absolute;
+        background-size: contain;
+        background-repeat: no-repeat;
+        top: 0;
+        left: 0;
+        will-change: transform;
+      }
 
-        #arena {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
+      .rock {
+        width: 70px;
+        height: 70px;
+        background-image: url("kuman.webp");
+      }
 
-        #player {
-            position: absolute;
-            z-index: 10;
-            width: 80px;
-            height: 100px;
-            background-image: url("trashcan.webp");
-            background-size: contain;
-            background-repeat: no-repeat;
-            bottom: 30px;
-            left: 0;
-            will-change: transform;
-            transition: background-image 0.3s;
-        }
-        
-        #player.shielded {
-            background-image: url("trashcan-shielded.webp");
-        }
+      .trash.bottle {
+        width: 40px;
+        height: 60px;
+        background-image: url("trash_bottle.webp");
+      }
 
-        .falling-object {
-            position: absolute;
-            background-size: contain;
-            background-repeat: no-repeat;
-            top: 0;
-            left: 0;
-            will-change: transform;
-        }
+      .trash.can {
+        width: 50px;
+        height: 50px;
+        background-image: url("trash_can.webp");
+      }
 
-        .rock {
-            width: 70px;
-            height: 70px;
-            background-image: url("kuman.webp");
-        }
-        
-        .trash.bottle {
-            width: 40px;
-            height: 60px;
-            background-image: url("trash_bottle.webp");
-        }
-        
-        .trash.can {
-            width: 50px;
-            height: 50px;
-            background-image: url("trash_can.webp");
-        }
+      .powerup.shield {
+        width: 60px;
+        height: 60px;
+        background-image: url("powerup_shield.webp");
+      }
 
-        .powerup.shield {
-             width: 60px;
-             height: 60px;
-             background-image: url("powerup_shield.webp");
-        }
-        
+      /* --- CONTROL & POPUP SECTION (MODIFIED) --- */
+      .control {
+        display: none;
+        z-index: 999;
+        width: 100%;
+        position: absolute;
+        bottom: 12vh;
+        left: 0;
+        padding: 0 5%;
+      }
 
-        /* --- CONTROL & POPUP SECTION (MODIFIED) --- */
-        .control {
-            display: none;
-            z-index: 999;
-            width: 100%;
-            position: absolute;
-            bottom: max(30px, 5%);
-            left: 0;
-            padding: 0 5%;
-        }
+      .control-btn {
+        position: absolute;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.3);
+        cursor: pointer;
+        opacity: 0.8;
+        touch-action: manipulation;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        transition: transform 0.1s;
+      }
 
-        .control-btn {
-            position: absolute;
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.3);
-            cursor: pointer;
-            opacity: 0.8;
-            touch-action: manipulation;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            transition: transform 0.1s;
-        }
-        
-        .control-btn:active {
-            transform: scale(0.9);
-            opacity: 1;
-        }
+      .control-btn:active {
+        transform: scale(0.9);
+        opacity: 1;
+      }
 
-        #left-btn {
-            background-image: url("left.webp");
-            background-size: cover;
-            left: 5%;
-        }
+      #left-btn {
+        background-image: url("left.webp");
+        background-size: cover;
+        left: 5%;
+      }
 
-        #right-btn {
-            background-image: url("right.webp");
-            background-size: cover;
-            right: 5%;
-        }
-        
-        .popup {
-            z-index: 9999;
-            visibility: hidden;
-            opacity: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(15, 15, 15, .9);
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.5s;
-            top: 0;
-            left: 0;
-        }
+      #right-btn {
+        background-image: url("right.webp");
+        background-size: cover;
+        right: 5%;
+      }
 
-        .popup-content {
-            background-color: #3e2723;
-            padding: 30px;
-            border-radius: 15px;
-            color: white;
-            text-align: center;
-            border: 5px solid #d7ccc8;
-            box-shadow: 0 0 40px #ff7043;
-            width: 90%;
-            max-width: 400px;
-            box-sizing: border-box;
-        }
-        .popup-content h1 {
-            font-size: 48px;
-            margin: 0;
-            color: #ff5722;
-        }
-         .popup-content h2 {
-            font-size: 24px;
-            margin: 15px 0;
-        }
-        .popup-content button {
-            color: white;
-            background-color: #ff5722;
-            border-radius: 8px;
-            padding: 15px 40px;
-            margin-top: 20px;
-            font-size: 20px;
-            border: none;
-            cursor: pointer;
-        }
+      .popup {
+        z-index: 9999;
+        visibility: hidden;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(15, 15, 15, 0.9);
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: opacity 0.5s;
+        top: 0;
+        left: 0;
+      }
+
+      .popup-content {
+        background-color: #3e2723;
+        padding: 30px;
+        border-radius: 15px;
+        color: white;
+        text-align: center;
+        border: 5px solid #d7ccc8;
+        box-shadow: 0 0 40px #ff7043;
+        width: 90%;
+        max-width: 400px;
+        box-sizing: border-box;
+      }
+      .popup-content h1 {
+        font-size: 48px;
+        margin: 0;
+        color: #ff5722;
+      }
+      .popup-content h2 {
+        font-size: 24px;
+        margin: 15px 0;
+      }
+      .popup-content button {
+        color: white;
+        background-color: #ff5722;
+        border-radius: 8px;
+        padding: 15px 40px;
+        margin-top: 20px;
+        font-size: 20px;
+        border: none;
+        cursor: pointer;
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="startpage">
-        <img src="logo.webp" alt="Game Logo">
-        <h2 id="highScoreDisplay">High Score: 0</h2>
-        <button id="start"><h2>PLAY</h2></button>
+      <img src="logo.webp" alt="Game Logo" />
+      <h2 id="highScoreDisplay">High Score: 0</h2>
+      <button id="start"><h2>PLAY</h2></button>
     </div>
 
     <div id="story" class="story">
-        <div class="relative">
-            <button id="skip"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 12 4 18V6Zm1 0V6l8 6-8 6Z"/>
-  </svg> 
-</button>
-            <img id="storyimg" src="mascot.webp" alt="">
-            <div id="app"></div>
-        </div>
+      <div class="relative">
+        <button id="skip">
+          <svg
+            class="icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path d="M12 12 4 18V6Zm1 0V6l8 6-8 6Z" />
+          </svg>
+        </button>
+        <img id="storyimg" src="mascot.webp" alt="" />
+        <div id="app"></div>
+      </div>
     </div>
-    
+
     <audio id="collect-sound" src="collect.mp3" preload="auto"></audio>
     <audio id="hit-sound" src="hit.mp3" preload="auto"></audio>
     <audio id="powerup-sound" src="powerup.mp3" preload="auto"></audio>
-    <audio id="background-music" src="background_music.mp3" loop preload="auto"></audio>
+    <audio
+      id="background-music"
+      src="background_music.mp3"
+      loop
+      preload="auto"
+    ></audio>
     <audio id="gameover-music" src="gameover_music.mp3" preload="auto"></audio>
 
     <main>
-        <div id="game-ui">
-            <div id="score">Score: 0</div>
-            <div id="lives">❤️❤️❤️</div>
-        </div>
-        <div id="arena">
-          <div id="player"></div>
-        </div>
+      <div id="game-ui">
+        <div id="score">Score: 0</div>
+        <div id="lives">❤️❤️❤️</div>
+      </div>
+      <div id="arena">
+        <div id="player"></div>
+      </div>
 
-        <div class="control">
-            <div id="left-btn" class="control-btn"></div>
-            <div id="right-btn" class="control-btn"></div>
-        </div>
+      <div class="control">
+        <div id="left-btn" class="control-btn"></div>
+        <div id="right-btn" class="control-btn"></div>
+      </div>
     </main>
 
     <div id="gameover" class="popup">
-        <div class="popup-content">
-            <h1>GAME OVER</h1>
-            <h2 id="finalScore">Your Score: 0</h2>
-            <h2 id="newHighScore">New High Score!</h2>
-            <button id="restart">Play Again</button>
-        </div>
+      <div class="popup-content">
+        <h1>GAME OVER</h1>
+        <h2 id="finalScore">Your Score: 0</h2>
+        <h2 id="newHighScore">New High Score!</h2>
+        <button id="restart">Play Again</button>
+      </div>
     </div>
 
     <script>
-        // --- DOM ELEMENTS ---
-        const startpage = document.querySelector(".startpage");
-        const startBtn = document.getElementById("start");
-        const storyPage = document.getElementById("story");
-        const storySkipBtn = document.getElementById("skip");
-        const app = document.getElementById('app');
-        const storyimg = document.getElementById("storyimg");
-        
-        const gameArena = document.querySelector("main");
-        const arena = document.getElementById("arena");
-        const player = document.getElementById("player");
-        const scoreDisplay = document.getElementById("score");
-        const livesDisplay = document.getElementById("lives");
-        const highScoreDisplay = document.getElementById("highScoreDisplay");
+      // --- DOM ELEMENTS ---
+      const startpage = document.querySelector(".startpage");
+      const startBtn = document.getElementById("start");
+      const storyPage = document.getElementById("story");
+      const storySkipBtn = document.getElementById("skip");
+      const app = document.getElementById("app");
+      const storyimg = document.getElementById("storyimg");
 
-        const controls = document.querySelector(".control");
-        const leftBtn = document.getElementById("left-btn");
-        const rightBtn = document.getElementById("right-btn");
-        
-        const gameOverPopup = document.getElementById("gameover");
-        const restartBtn = document.getElementById("restart");
-        const finalScoreDisplay = document.getElementById("finalScore");
-        const newHighScoreDisplay = document.getElementById("newHighScore");
+      const gameArena = document.querySelector("main");
+      const arena = document.getElementById("arena");
+      const player = document.getElementById("player");
+      const scoreDisplay = document.getElementById("score");
+      const livesDisplay = document.getElementById("lives");
+      const highScoreDisplay = document.getElementById("highScoreDisplay");
 
-        // Audio Elements
-        const collectSound = document.getElementById("collect-sound");
-        const hitSound = document.getElementById("hit-sound");
-        const powerupSound = document.getElementById("powerup-sound");
-        const backgroundMusic = document.getElementById("background-music");
-        const gameOverMusic = document.getElementById("gameover-music");
+      const controls = document.querySelector(".control");
+      const leftBtn = document.getElementById("left-btn");
+      const rightBtn = document.getElementById("right-btn");
 
+      const gameOverPopup = document.getElementById("gameover");
+      const restartBtn = document.getElementById("restart");
+      const finalScoreDisplay = document.getElementById("finalScore");
+      const newHighScoreDisplay = document.getElementById("newHighScore");
 
-        // --- GAME STATE & CONFIGURATION ---
-        let score = 0;
-        let playerLives = 3;
-        let gameSpeed = 3;
-        let isGameOver = false;
-        let isShielded = false;
-        let highScore = localStorage.getItem('trashGameHighScore') || 0;
-        
-        let arenaWidth = 450;
-        let arenaHeight = 800;
-        let playerState = { x: 0, width: 80, height: 100 };
-        let fallingObjects = [];
+      // Audio Elements
+      const collectSound = document.getElementById("collect-sound");
+      const hitSound = document.getElementById("hit-sound");
+      const powerupSound = document.getElementById("powerup-sound");
+      const backgroundMusic = document.getElementById("background-music");
+      const gameOverMusic = document.getElementById("gameover-music");
 
-        const trashTypes = [
-            { class: 'trash bottle', points: 3 },
-            { class: 'trash can', points: 1 }
-        ];
+      // --- GAME STATE & CONFIGURATION ---
+      let score = 0;
+      let playerLives = 3;
+      let gameSpeed = 3;
+      let isGameOver = false;
+      let isShielded = false;
+      let highScore = localStorage.getItem("trashGameHighScore") || 0;
 
-        // --- INITIALIZATION ---
-        document.addEventListener('DOMContentLoaded', () => {
-            highScoreDisplay.textContent = `High Score: ${highScore}`;
-        });
+      let arenaWidth = 450;
+      let arenaHeight = 800;
+      let playerState = { x: 0, width: 80, height: 100 };
+      let fallingObjects = [];
 
-        startBtn.addEventListener("click", () => {
-            startpage.style.display = "none";
-            startStory();
-        });
+      const trashTypes = [
+        { class: "trash bottle", points: 3 },
+        { class: "trash can", points: 1 },
+      ];
 
-        storySkipBtn.addEventListener("click", () => {
-            storyPage.style.display = "none";
-            startGame();
-        });
+      // --- INITIALIZATION ---
+      document.addEventListener("DOMContentLoaded", () => {
+        highScoreDisplay.textContent = `High Score: ${highScore}`;
+      });
 
-        // --- STORY FUNCTION (UNCHANGED) ---
-        function startStory() {
-            storyPage.style.display = "block";
-            storyimg.style.animation = "kanan 2s"; // Assuming 'kanan' animation exists
-            const typewriter = new Typewriter(app, { loop: false, delay: 50 });
+      startBtn.addEventListener("click", () => {
+        startpage.style.display = "none";
+        startStory();
+      });
 
-            typewriter.typeString('Di sekolah yang indah...')
-                .pauseFor(1000)
-                .deleteAll()
-                .typeString('Banyak orang tidak peduli dan membuang sampah sembarangan.')
-                .pauseFor(1000)
-                .deleteAll()
-                .typeString('Tugasmu adalah membersihkannya sebelum semuanya terlambat!')
-                .pauseFor(2000)
-                .start();
-        }
-        
-        // --- GAME LOGIC ---
-        function startGame() {
-            score = 0;
-            playerLives = 3;
-            gameSpeed = 3;
-            isGameOver = false;
-            isShielded = false;
+      storySkipBtn.addEventListener("click", () => {
+        storyPage.style.display = "none";
+        startGame();
+      });
 
-            arenaWidth = gameArena.clientWidth;
-            arenaHeight = gameArena.clientHeight;
-            playerState.x = (arenaWidth - playerState.width) / 2;
-            player.style.transform = `translate3d(${playerState.x}px, 0, 0)`;
-            fallingObjects = [];
+      // --- STORY FUNCTION (UNCHANGED) ---
+      function startStory() {
+        storyPage.style.display = "block";
+        storyimg.style.animation = "kanan 2s"; // Assuming 'kanan' animation exists
+        const typewriter = new Typewriter(app, { loop: false, delay: 50 });
 
-            scoreDisplay.textContent = `Score: ${score}`;
-            livesDisplay.innerHTML = '❤️❤️❤️';
-            player.classList.remove('shielded');
-            
-            gameOverPopup.style.visibility = "hidden";
-            gameOverPopup.style.opacity = 0;
-            gameArena.style.visibility = "visible";
-            controls.style.display = "block";
-            
-            arena.querySelectorAll('.falling-object').forEach(obj => obj.remove());
+        typewriter
+          .typeString("Di sekolah yang indah...")
+          .pauseFor(1000)
+          .deleteAll()
+          .typeString(
+            "Banyak orang tidak peduli dan membuang sampah sembarangan.",
+          )
+          .pauseFor(1000)
+          .deleteAll()
+          .typeString(
+            "Tugasmu adalah membersihkannya sebelum semuanya terlambat!",
+          )
+          .pauseFor(2000)
+          .start();
+      }
 
-            if (gameOverMusic) gameOverMusic.pause();
-            if (backgroundMusic) {
-                backgroundMusic.currentTime = 0;
-                backgroundMusic.play();
-            }
-            
-            requestAnimationFrame(gameLoop);
-        }
+      // --- GAME LOGIC ---
+      function startGame() {
+        score = 0;
+        playerLives = 3;
+        gameSpeed = 3;
+        isGameOver = false;
+        isShielded = false;
 
-        let lastObjectTime = 0;
-        let backgroundY = 0;
+        arenaWidth = gameArena.clientWidth;
+        arenaHeight = gameArena.clientHeight;
+        playerState.x = (arenaWidth - playerState.width) / 2;
+        player.style.transform = `translate3d(${playerState.x}px, 0, 0)`;
+        fallingObjects = [];
 
-        function gameLoop(timestamp) {
-            if (isGameOver) return;
-            
-            arenaWidth = gameArena.clientWidth;
-            arenaHeight = gameArena.clientHeight;
-            
-            backgroundY += gameSpeed / 2;
-            gameArena.style.backgroundPositionY = backgroundY + "px";
+        scoreDisplay.textContent = `Score: ${score}`;
+        livesDisplay.innerHTML = "❤️❤️❤️";
+        player.classList.remove("shielded");
 
-            if (timestamp - lastObjectTime > (1000 / (gameSpeed / 2))) {
-                spawnObject();
-                lastObjectTime = timestamp;
-            }
+        gameOverPopup.style.visibility = "hidden";
+        gameOverPopup.style.opacity = 0;
+        gameArena.style.visibility = "visible";
+        controls.style.display = "block";
 
-            updatePlayerPosition();
-            
-            for (let i = 0; i < fallingObjects.length; i++) {
-                let obj = fallingObjects[i];
-                if (obj.markedForDeletion) continue;
-                
-                obj.y += gameSpeed;
-                obj.element.style.transform = `translate3d(${obj.x}px, ${obj.y}px, 0)`;
-                
-                if (checkCollisionAABB(playerState, obj)) {
-                    handleCollisionMath(obj);
-                } else if (obj.y > arenaHeight) {
-                    obj.element.remove();
-                    obj.markedForDeletion = true;
-                }
-            }
-            
-            fallingObjects = fallingObjects.filter(obj => !obj.markedForDeletion);
-            
-            checkDifficulty();
-            
-            requestAnimationFrame(gameLoop);
+        arena
+          .querySelectorAll(".falling-object")
+          .forEach((obj) => obj.remove());
+
+        if (gameOverMusic) gameOverMusic.pause();
+        if (backgroundMusic) {
+          backgroundMusic.currentTime = 0;
+          backgroundMusic.play();
         }
 
-        function spawnObject() {
-            const obj = document.createElement('div');
-            obj.classList.add('falling-object');
+        requestAnimationFrame(gameLoop);
+      }
 
-            let typeStr = '';
-            let points = 0;
-            let w = 0, h = 0;
+      let lastObjectTime = 0;
+      let backgroundY = 0;
 
-            const rand = Math.random();
-            if (rand < 0.1 && score > 20) {
-                obj.classList.add('powerup', 'shield');
-                typeStr = 'shield';
-                w = 60; h = 60;
-            } else if (rand < 0.45) {
-                obj.classList.add('rock');
-                typeStr = 'rock';
-                w = 70; h = 70;
-            } else {
-                const trashType = trashTypes[Math.floor(Math.random() * trashTypes.length)];
-                trashType.class.split(' ').forEach(c => obj.classList.add(c));
-                typeStr = 'trash';
-                points = trashType.points;
-                w = trashType.class.includes('bottle') ? 40 : 50;
-                h = trashType.class.includes('bottle') ? 60 : 50;
-            }
-            
-            let xPos = Math.random() * (arenaWidth - w);
-            let yPos = -h;
-            
-            obj.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
-            arena.appendChild(obj);
-            
-            fallingObjects.push({
-                x: xPos,
-                y: yPos,
-                width: w,
-                height: h,
-                type: typeStr,
-                points: points,
-                element: obj,
-                markedForDeletion: false
-            });
+      function gameLoop(timestamp) {
+        if (isGameOver) return;
+
+        arenaWidth = gameArena.clientWidth;
+        arenaHeight = gameArena.clientHeight;
+
+        backgroundY += gameSpeed / 2;
+        gameArena.style.backgroundPositionY = backgroundY + "px";
+
+        if (timestamp - lastObjectTime > 1000 / (gameSpeed / 2)) {
+          spawnObject();
+          lastObjectTime = timestamp;
         }
 
-        function checkCollisionAABB(p, obj) {
-            let pLeft = p.x;
-            let pRight = p.x + p.width;
-            let pTop = arenaHeight - 30 - p.height; 
-            let pBottom = arenaHeight - 30;
-            
-            let oLeft = obj.x;
-            let oRight = obj.x + obj.width;
-            let oTop = obj.y;
-            let oBottom = obj.y + obj.height;
-            
-            return (pLeft < oRight && pRight > oLeft && pTop < oBottom && pBottom > oTop);
-        }
+        updatePlayerPosition();
 
-        function handleCollisionMath(obj) {
-            obj.markedForDeletion = true;
+        for (let i = 0; i < fallingObjects.length; i++) {
+          let obj = fallingObjects[i];
+          if (obj.markedForDeletion) continue;
+
+          obj.y += gameSpeed;
+          obj.element.style.transform = `translate3d(${obj.x}px, ${obj.y}px, 0)`;
+
+          if (checkCollisionAABB(playerState, obj)) {
+            handleCollisionMath(obj);
+          } else if (obj.y > arenaHeight) {
             obj.element.remove();
-            
-            const type = obj.type;
+            obj.markedForDeletion = true;
+          }
+        }
 
-            if (type === 'rock') {
-                if (isShielded) {
-                    isShielded = false;
-                    player.classList.remove('shielded');
-                    powerupSound.currentTime = 0;
-                    powerupSound.play();
-                } else {
-                    playerLives--;
-                    hitSound.currentTime = 0;
-                    hitSound.play();
-                    updateLivesUI();
-                    if (playerLives <= 0) {
-                        endGame();
-                    }
-                }
-            } else if (type === 'trash') {
-                score += obj.points;
-                scoreDisplay.textContent = `Score: ${score}`;
-                collectSound.currentTime = 0; 
-                collectSound.play();
-            } else if (type === 'shield') {
-                isShielded = true;
-                player.classList.add('shielded');
-                powerupSound.currentTime = 0; 
-                powerupSound.play();
-                setTimeout(() => {
-                    isShielded = false;
-                    player.classList.remove('shielded');
-                }, 5000);
+        fallingObjects = fallingObjects.filter((obj) => !obj.markedForDeletion);
+
+        checkDifficulty();
+
+        requestAnimationFrame(gameLoop);
+      }
+
+      function spawnObject() {
+        const obj = document.createElement("div");
+        obj.classList.add("falling-object");
+
+        let typeStr = "";
+        let points = 0;
+        let w = 0,
+          h = 0;
+
+        const rand = Math.random();
+        if (rand < 0.1 && score > 20) {
+          obj.classList.add("powerup", "shield");
+          typeStr = "shield";
+          w = 60;
+          h = 60;
+        } else if (rand < 0.45) {
+          obj.classList.add("rock");
+          typeStr = "rock";
+          w = 70;
+          h = 70;
+        } else {
+          const trashType =
+            trashTypes[Math.floor(Math.random() * trashTypes.length)];
+          trashType.class.split(" ").forEach((c) => obj.classList.add(c));
+          typeStr = "trash";
+          points = trashType.points;
+          w = trashType.class.includes("bottle") ? 40 : 50;
+          h = trashType.class.includes("bottle") ? 60 : 50;
+        }
+
+        let xPos = Math.random() * (arenaWidth - w);
+        let yPos = -h;
+
+        obj.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
+        arena.appendChild(obj);
+
+        fallingObjects.push({
+          x: xPos,
+          y: yPos,
+          width: w,
+          height: h,
+          type: typeStr,
+          points: points,
+          element: obj,
+          markedForDeletion: false,
+        });
+      }
+
+      function checkCollisionAABB(p, obj) {
+        let pLeft = p.x;
+        let pRight = p.x + p.width;
+        let pTop = arenaHeight - 30 - p.height;
+        let pBottom = arenaHeight - 30;
+
+        let oLeft = obj.x;
+        let oRight = obj.x + obj.width;
+        let oTop = obj.y;
+        let oBottom = obj.y + obj.height;
+
+        return (
+          pLeft < oRight && pRight > oLeft && pTop < oBottom && pBottom > oTop
+        );
+      }
+
+      function handleCollisionMath(obj) {
+        obj.markedForDeletion = true;
+        obj.element.remove();
+
+        const type = obj.type;
+
+        if (type === "rock") {
+          if (isShielded) {
+            isShielded = false;
+            player.classList.remove("shielded");
+            powerupSound.currentTime = 0;
+            powerupSound.play();
+          } else {
+            playerLives--;
+            hitSound.currentTime = 0;
+            hitSound.play();
+            updateLivesUI();
+            if (playerLives <= 0) {
+              endGame();
             }
+          }
+        } else if (type === "trash") {
+          score += obj.points;
+          scoreDisplay.textContent = `Score: ${score}`;
+          collectSound.currentTime = 0;
+          collectSound.play();
+        } else if (type === "shield") {
+          isShielded = true;
+          player.classList.add("shielded");
+          powerupSound.currentTime = 0;
+          powerupSound.play();
+          setTimeout(() => {
+            isShielded = false;
+            player.classList.remove("shielded");
+          }, 5000);
         }
-        
-        function updateLivesUI() {
-            livesDisplay.textContent = '❤️'.repeat(playerLives) + '🤍'.repeat(3 - playerLives);
-        }
+      }
 
-        function checkDifficulty() {
-            if (score > 100) gameSpeed = 7;
-            else if (score > 50) gameSpeed = 6;
-            else if (score > 20) gameSpeed = 4;
-        }
+      function updateLivesUI() {
+        livesDisplay.textContent =
+          "❤️".repeat(playerLives) + "🤍".repeat(3 - playerLives);
+      }
 
-        function endGame() {
-            isGameOver = true;
-            
-            if (backgroundMusic) backgroundMusic.pause();
-            if (gameOverMusic) {
-                gameOverMusic.currentTime = 0;
-                gameOverMusic.play();
-            }
-            
-            finalScoreDisplay.textContent = `Your Score: ${score}`;
-            newHighScoreDisplay.style.display = 'none';
+      function checkDifficulty() {
+        if (score > 100) gameSpeed = 7;
+        else if (score > 50) gameSpeed = 6;
+        else if (score > 20) gameSpeed = 4;
+      }
 
-            if (score > highScore) {
-                highScore = score;
-                localStorage.setItem('trashGameHighScore', highScore);
-                newHighScoreDisplay.style.display = 'block';
-                highScoreDisplay.textContent = `High Score: ${highScore}`;
-            }
+      function endGame() {
+        isGameOver = true;
 
-            gameOverPopup.style.visibility = "visible";
-            gameOverPopup.style.opacity = 1;
-        }
-
-        // --- CONTROLS ---
-        let moveDirection = 0;
-        let playerSpeed = 10;
-
-        function updatePlayerPosition() {
-            if (isGameOver || moveDirection === 0) return;
-            
-            if (moveDirection === -1 && playerState.x > 5) {
-                playerState.x -= playerSpeed;
-            } else if (moveDirection === 1 && playerState.x < arenaWidth - playerState.width - 5) {
-                playerState.x += playerSpeed;
-            }
-            player.style.transform = `translate3d(${playerState.x}px, 0, 0)`;
+        if (backgroundMusic) backgroundMusic.pause();
+        if (gameOverMusic) {
+          gameOverMusic.currentTime = 0;
+          gameOverMusic.play();
         }
 
-        function handleControlDown(e) {
-            if (e.cancelable) e.preventDefault(); // Prevent default touch actions like scrolling
-            if (isGameOver) return;
-            if (e.key === 'ArrowLeft' || e.target.id === 'left-btn' || e.target.closest('#left-btn')) {
-                moveDirection = -1;
-            } else if (e.key === 'ArrowRight' || e.target.id === 'right-btn' || e.target.closest('#right-btn')) {
-                moveDirection = 1;
-            }
+        finalScoreDisplay.textContent = `Your Score: ${score}`;
+        newHighScoreDisplay.style.display = "none";
+
+        if (score > highScore) {
+          highScore = score;
+          localStorage.setItem("trashGameHighScore", highScore);
+          newHighScoreDisplay.style.display = "block";
+          highScoreDisplay.textContent = `High Score: ${highScore}`;
         }
 
-        function handleControlUp(e) {
-            if (e.cancelable) e.preventDefault();
-            if (e.key === 'ArrowLeft' || e.target.id === 'left-btn' || e.target.closest('#left-btn')) {
-                if (moveDirection === -1) moveDirection = 0;
-            } else if (e.key === 'ArrowRight' || e.target.id === 'right-btn' || e.target.closest('#right-btn')) {
-                if (moveDirection === 1) moveDirection = 0;
-            }
+        gameOverPopup.style.visibility = "visible";
+        gameOverPopup.style.opacity = 1;
+      }
+
+      // --- CONTROLS ---
+      let moveDirection = 0;
+      let playerSpeed = 10;
+
+      function updatePlayerPosition() {
+        if (isGameOver || moveDirection === 0) return;
+
+        if (moveDirection === -1 && playerState.x > 5) {
+          playerState.x -= playerSpeed;
+        } else if (
+          moveDirection === 1 &&
+          playerState.x < arenaWidth - playerState.width - 5
+        ) {
+          playerState.x += playerSpeed;
         }
+        player.style.transform = `translate3d(${playerState.x}px, 0, 0)`;
+      }
 
-        restartBtn.addEventListener("click", startGame);
-        window.addEventListener("keydown", handleControlDown);
-        window.addEventListener("keyup", handleControlUp);
-        
-        leftBtn.addEventListener("mousedown", handleControlDown);
-        leftBtn.addEventListener("mouseup", handleControlUp);
-        leftBtn.addEventListener("mouseleave", handleControlUp);
-        leftBtn.addEventListener("touchstart", handleControlDown, {passive: false});
-        leftBtn.addEventListener("touchend", handleControlUp, {passive: false});
-        leftBtn.addEventListener("touchcancel", handleControlUp, {passive: false});
-        
-        rightBtn.addEventListener("mousedown", handleControlDown);
-        rightBtn.addEventListener("mouseup", handleControlUp);
-        rightBtn.addEventListener("mouseleave", handleControlUp);
-        rightBtn.addEventListener("touchstart", handleControlDown, {passive: false});
-        rightBtn.addEventListener("touchend", handleControlUp, {passive: false});
-        rightBtn.addEventListener("touchcancel", handleControlUp, {passive: false});
+      function handleControlDown(e) {
+        if (e.cancelable) e.preventDefault(); // Prevent default touch actions like scrolling
+        if (isGameOver) return;
+        if (
+          e.key === "ArrowLeft" ||
+          e.target.id === "left-btn" ||
+          e.target.closest("#left-btn")
+        ) {
+          moveDirection = -1;
+        } else if (
+          e.key === "ArrowRight" ||
+          e.target.id === "right-btn" ||
+          e.target.closest("#right-btn")
+        ) {
+          moveDirection = 1;
+        }
+      }
 
+      function handleControlUp(e) {
+        if (e.cancelable) e.preventDefault();
+        if (
+          e.key === "ArrowLeft" ||
+          e.target.id === "left-btn" ||
+          e.target.closest("#left-btn")
+        ) {
+          if (moveDirection === -1) moveDirection = 0;
+        } else if (
+          e.key === "ArrowRight" ||
+          e.target.id === "right-btn" ||
+          e.target.closest("#right-btn")
+        ) {
+          if (moveDirection === 1) moveDirection = 0;
+        }
+      }
+
+      restartBtn.addEventListener("click", startGame);
+      window.addEventListener("keydown", handleControlDown);
+      window.addEventListener("keyup", handleControlUp);
+
+      leftBtn.addEventListener("mousedown", handleControlDown);
+      leftBtn.addEventListener("mouseup", handleControlUp);
+      leftBtn.addEventListener("mouseleave", handleControlUp);
+      leftBtn.addEventListener("touchstart", handleControlDown, {
+        passive: false,
+      });
+      leftBtn.addEventListener("touchend", handleControlUp, { passive: false });
+      leftBtn.addEventListener("touchcancel", handleControlUp, {
+        passive: false,
+      });
+
+      rightBtn.addEventListener("mousedown", handleControlDown);
+      rightBtn.addEventListener("mouseup", handleControlUp);
+      rightBtn.addEventListener("mouseleave", handleControlUp);
+      rightBtn.addEventListener("touchstart", handleControlDown, {
+        passive: false,
+      });
+      rightBtn.addEventListener("touchend", handleControlUp, {
+        passive: false,
+      });
+      rightBtn.addEventListener("touchcancel", handleControlUp, {
+        passive: false,
+      });
     </script>
-</body>
+  </body>
 </html>
